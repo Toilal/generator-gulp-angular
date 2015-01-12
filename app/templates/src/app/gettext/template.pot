@@ -1,0 +1,41 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: src/app/main/main.html:6
+msgid "'Allo, 'Allo!"
+msgstr ""
+
+#: src/components/navbar/navbar.html:12
+msgid "About"
+msgstr ""
+
+#: src/app/main/main.html:9
+msgid "Always a pleasure scaffolding your apps."
+msgstr ""
+
+#: src/components/navbar/navbar.html:13
+msgid "Contact"
+msgstr ""
+
+#: src/components/navbar/navbar.html:17
+msgid "Current date"
+msgstr ""
+
+#: src/components/navbar/navbar.html:11
+msgid "Home"
+msgstr ""
+
+#: src/app/main/main.html:8
+msgid "I'm Yeoman"
+msgstr ""
+
+#: src/app/main/main.html:11
+msgid "Splendid!"
+msgstr ""
+
+#: src/app/main/main.html:30
+msgid "With ♥ from"
+msgstr ""

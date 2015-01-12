@@ -17,3 +17,7 @@
 .th img.right {
   width: 50px;
 }
+
+select.language-select {
+    margin: 0;
+}

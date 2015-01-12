@@ -6,5 +6,8 @@ module <%= appName %> {
   angular.module('<%= appName %>', [<%= modulesDependencies %>])
     .controller('MainCtrl', MainCtrl)
     .controller('NavbarCtrl', NavbarCtrl)
+<% if (translated) {%>
+    .controller('LanguageSelectCtrl', LanguageSelectCtrl)
+<% } %>
     <%= routerJs %>;
 }
