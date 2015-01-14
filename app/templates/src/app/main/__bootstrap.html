@@ -3,12 +3,12 @@
   <div ng-include="'components/navbar/navbar.html'"></div>
 
   <div class="jumbotron text-center">
-    <h1>'Allo, 'Allo!</h1>
+    <h1<% if (translated) { %> translate<% } %>>'Allo, 'Allo!</h1>
     <p class="lead">
-      <img src="assets/images/yeoman.png" alt="I'm Yeoman"><br>
-      Always a pleasure scaffolding your apps.
+      <img src="assets/images/yeoman.png" alt="<% if (translated) { %>{{'I\'m Yeoman' | translate}}<% } else { %>I'm Yeoman<% } %>"><br>
+        <% if (translated) { %><span translate><% } %>Always a pleasure scaffolding your apps.</span>
     </p>
-    <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
+    <p><a class="btn btn-lg btn-success" ng-href="#"<% if (translated) { %> translate<% } %>>Splendid!</a></p>
   </div>
 
   <div class="row">
@@ -16,8 +16,8 @@
       <div class="thumbnail">
         <img class="pull-right" ng-src="assets/images/{{awesomeThing.logo}}" alt="{{awesomeThing.title}}">
         <div class="caption">
-          <h3>{{awesomeThing.title}}</h3>
-          <p>{{awesomeThing.description}}</p>
+          <h3>{{awesomeThing.title<% if (translated) { %>| translate<% } %>}}</h3>
+          <p>{{awesomeThing.description<% if (translated) { %>| translate<% } %>}}</p>
           <p><a ng-href="{{awesomeThing.url}}">{{awesomeThing.url}}</a></p>
         </div>
       </div>
@@ -27,7 +27,7 @@
   <hr>
 
   <div class="footer">
-    <p>With ♥ from <a href="https://twitter.com/Swiip">@Swiip</a></p>
+    <p><% if (translated) { %><span translate><% } %>With ♥ from<% if (translated) { %></span><% } %> <a href="https://twitter.com/Swiip">@Swiip</a></p>
   </div>
 
 </div>

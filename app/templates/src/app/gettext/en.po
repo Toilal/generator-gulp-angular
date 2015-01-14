@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: generator-gulp-angular\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Toilal <toilal.dev@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: en\n"
+
+#: src/app/main/main.html:6
+msgid "'Allo, 'Allo!"
+msgstr "'Allo, 'Allo!"
+
+#: src/components/navbar/navbar.html:12
+msgid "About"
+msgstr "About"
+
+#: src/app/main/main.html:9
+msgid "Always a pleasure scaffolding your apps."
+msgstr "Always a pleasure scaffolding your apps."
+
+#: src/components/navbar/navbar.html:13
+msgid "Contact"
+msgstr "Contact"
+
+#: src/components/navbar/navbar.html:17
+msgid "Current date"
+msgstr "Current date"
+
+#: src/components/navbar/navbar.html:11
+msgid "Home"
+msgstr "Home"
+
+#: src/app/main/main.html:8
+msgid "I'm Yeoman"
+msgstr "I'm Yeoman"
+
+#: src/app/main/main.html:11
+msgid "Splendid!"
+msgstr "Splendid!"
+
+#: src/app/main/main.html:30
+msgid "With ♥ from"
+msgstr "With ♥ from"

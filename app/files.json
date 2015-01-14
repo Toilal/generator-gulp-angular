@@ -10,6 +10,9 @@
     "src/favicon.ico",
     "src/404.html",
     "src/assets/images/yeoman.png",
+    "src/app/gettext/template.pot",
+    "src/app/gettext/en.po",
+    "src/app/gettext/fr.po",
     "karma.conf.js",
     "protractor.conf.js",
     "e2e/main.spec.js"
@@ -30,11 +33,15 @@
     "gulp/styles.js",
     "gulp/watch.js",
     "gulp/server.js",
+    "gulp/gettext.js",
     "gulp/unit-tests.js",
     "src/app/index.js",
     "src/index.html",
     "src/app/main/main.controller.js",
     "src/app/main/main.controller.spec.js",
-    "src/components/navbar/navbar.controller.js"
+    "src/components/navbar/navbar.controller.js",
+    "src/components/languageSelect/languageSelect.controller.js",
+    "src/app/gettext/gettext.config.js",
+    "src/app/translate/translate.js"
   ]
 }

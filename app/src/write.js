@@ -40,7 +40,7 @@ module.exports = function () {
     copy(src, src);
   });
   _.forEach(this.partialCopies, function(dest, src) {
-    copy(src, dest);
+    copy(src, dest, true);
   });
   _.forEach(this.styleCopies, function(dest, src) {
     copy(src, dest, true);

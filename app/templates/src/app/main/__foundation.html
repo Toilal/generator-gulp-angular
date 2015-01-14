@@ -5,10 +5,10 @@
   <div class="row">
     <div class="large-12 large-text-center columns">
       <div class="panel">
-        <h1>'Allo, 'Allo!</h1>
-        <img src="assets/images/yeoman.png" alt="I'm Yeoman"><br>
-        <p>Always a pleasure scaffolding your apps.</p>
-        <p><a class="button radius" ng-href="#">Splendid!</a></p>
+        <h1<% if (translated) { %> translate<% } %>>'Allo, 'Allo!</h1>
+        <img src="assets/images/yeoman.png" alt="<% if (translated) { %>{{'I\'m Yeoman' | translate}}<% } else { %>I'm Yeoman<% } %>"><br>
+        <p<% if (translated) { %> translate<% } %>>Always a pleasure scaffolding your apps.</p>
+        <p><a class="button radius" ng-href="#"<% if (translated) { %> translate<% } %>>Splendid!</a></p>
       </div>
     </div>
   </div>
@@ -18,8 +18,8 @@
       <div class="th">
         <img class="right" ng-src="assets/images/{{awesomeThing.logo}}" alt="{{awesomeThing.title}}">
         <div class="caption">
-          <h3>{{awesomeThing.title}}</h3>
-          <p>{{awesomeThing.description}}</p>
+          <h3>{{awesomeThing.title<% if (translated) { %>| translate<% } %>}}</h3>
+          <p>{{awesomeThing.description<% if (translated) { %>| translate<% } %>}}</p>
           <p><a ng-href="{{awesomeThing.url}}">{{awesomeThing.url}}</a></p>
         </div>
       </div>
@@ -29,7 +29,7 @@
   <div class="row">
     <div class="large-12 columns">
       <hr>
-      <p>With ♥ from <a href="https://twitter.com/Swiip">@Swiip</a></p>
+      <p><% if (translated) { %><span translate><% } %>With ♥ from<% if (translated) { %></span><% } %> <a href="https://twitter.com/Swiip">@Swiip</a></p>
     </div>
   </div>
 </div>

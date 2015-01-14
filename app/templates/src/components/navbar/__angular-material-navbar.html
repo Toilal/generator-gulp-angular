@@ -3,11 +3,13 @@
   <md-button href="https://github.com/Swiip/generator-gulp-angular">Gulp Angular</md-button>
 
   <section flex layout="row" layout-align="left center">
-    <md-button href="#" class="md-raised">Home</md-button>
-    <md-button href="#" class="md-raised">About</md-button>
-    <md-button href="#" class="md-raised">Contact</md-button>
+    <md-button ng-href="#" class="md-raised"><% if (translated) { %><span translate><% } %>Home<% if (translated) { %></span><% } %></md-button>
+    <md-button ng-href="#" class="md-raised"><% if (translated) { %><span translate><% } %>About<% if (translated) { %></span><% } %></md-button>
+    <md-button ng-href="#" class="md-raised"><% if (translated) { %><span translate><% } %>Contact<% if (translated) { %></span><% } %></md-button>
   </section>
 
-  <md-button href="#">Current date: {{ date | date:'yyyy-MM-dd' }}</md-button>
+<% if (translated) { %>
+  <md-button ng-href="#"><div ng-include="'components/languageSelect/languageSelect.html'"></div></md-button><% } %>
+  <md-button ng-href="#"><% if (translated) { %><span translate><% } %>Current date<% if (translated) { %></span><% } %>: {{ date | date:'yyyy-MM-dd' }}</md-button>
 
 </md-toolbar>

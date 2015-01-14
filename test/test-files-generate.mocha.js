@@ -172,7 +172,13 @@ describe('gulp-angular generator', function () {
 
         assert.noFileContent([].concat([
           // Check no markups
-          ['gulp/build.js', /gulp\.task\('partials'.*?'markups'/]
+          ['gulp/build.js', /gulp\.task\('partials'.*?'markups'/],
+
+          // Check is not translated
+          ['src/app/main/main.html', /<span\s*?translate>/],
+          ['src/app/main/main.html', /\|\s*?translate/],
+          ['src/components/navbar/navbar.html', /<span\s*?translate>/],
+          ['src/components/navbar/navbar.html', /\|\s*?translate/],
         ]));
 
         done();
@@ -881,12 +887,12 @@ describe('gulp-angular generator', function () {
         ]);
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['gulp/inject.js', /gulp\.task\(\'inject\', \[\'styles\'\]/],
-          ['gulp/inject.js', /paths\.src \+ '\/{app,components}\/\*\*\/\*\.js'/]
+          ['gulp/inject.js', /gulp\.task\('inject', \['styles']/],
+          ['gulp/inject.js', /paths\.src \+ '\/\{app,components}\/\*\*\/\*\.js'/]
         ]));
 
         assert.noFileContent([
-          ['gulp/build.js', /gulp\.task\(\'browserify\'/],
+          ['gulp/build.js', /gulp\.task\('browserify'/],
           ['package.json', /gulp-browserify/]
         ]);
 
@@ -919,14 +925,14 @@ describe('gulp-angular generator', function () {
         ]);
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['gulp/inject.js', /gulp\.task\('inject', \['styles', 'scripts'\]/],
-          ['gulp/inject.js', /'{' \+ paths\.src \+ ',' \+ paths\.tmp \+ '\/serve}\/{app,components}\/\*\*\/\*\.js',/],
+          ['gulp/inject.js', /gulp\.task\('inject', \['styles', 'scripts']/],
+          ['gulp/inject.js', /'{' \+ paths\.src \+ ',' \+ paths\.tmp \+ '\/serve}\/\{app,components}\/\*\*\/\*\.js',/],
           ['package.json', /gulp-coffee/],
           ['package.json', /gulp-coffeelint/]
         ]));
 
         assert.noFileContent([
-          ['gulp/build.js', /gulp\.task\(\'browserify\'/],
+          ['gulp/build.js', /gulp\.task\('browserify'/],
           ['package.json', /gulp-browserify/]
         ]);
 
@@ -942,7 +948,7 @@ describe('gulp-angular generator', function () {
       });
     });
 
-    it('should add browerify and gulp-6to5', function (done) {
+    it('should add browserify and gulp-6to5', function (done) {
       gulpAngular.run({}, function() {
         assert.file([].concat(expectedFile, [
           'src/app/index.js',
@@ -956,9 +962,9 @@ describe('gulp-angular generator', function () {
         ]);
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['gulp/scripts.js', /gulp\.task\(\'browserify\'/],
+          ['gulp/scripts.js', /gulp\.task\('browserify'/],
           ['gulp/inject.js', /gulp\.task\('inject', \['styles', 'browserify'\]/],
-          ['gulp/inject.js', /paths\.tmp \+ '\/serve\/{app,components}\/\*\*\/\*\.js',/],
+          ['gulp/inject.js', /paths\.tmp \+ '\/serve\/\{app,components}\/\*\*\/\*\.js',/],
           ['package.json', /gulp-6to5/],
           ['package.json', /gulp-browserify/]
         ]));
@@ -992,8 +998,8 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['gulp/scripts.js', /gulp\.task\(\'browserify\'/],
-          ['gulp/inject.js', /gulp\.task\('inject', \['styles', 'browserify'\]/],
-          ['gulp/inject.js', /paths\.tmp \+ '\/serve\/{app,components}\/\*\*\/\*\.js',/],
+          ['gulp/inject.js', /gulp\.task\('inject', \['styles', 'browserify']/],
+          ['gulp/inject.js', /paths\.tmp \+ '\/serve\/\{app,components}\/\*\*\/\*\.js',/],
           ['package.json', /gulp-traceur/],
           ['package.json', /gulp-browserify/],
           ['bower.json', /traceur-runtime/]
@@ -1029,15 +1035,15 @@ describe('gulp-angular generator', function () {
         ]);
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['gulp/inject.js', /gulp\.task\('inject', \['styles', 'scripts'\]/],
-          ['gulp/inject.js', /'{' \+ paths\.src \+ ',' \+ paths\.tmp \+ '\/serve}\/{app,components}\/\*\*\/\*\.js',/],
+          ['gulp/inject.js', /gulp\.task\('inject', \['styles', 'scripts']/],
+          ['gulp/inject.js', /'{' \+ paths\.src \+ ',' \+ paths\.tmp \+ '\/serve}\/\{app,components}\/\*\*\/\*\.js',/],
           ['package.json', /gulp-typescript/],
           ['gulp/build.js', /gulp\.task\('clean', \['tsd:purge']/],
           ['gulp/scripts.js', /gulp\.task\('scripts', \['tsd:install']/]
         ]));
 
         assert.noFileContent([
-          ['gulp/build.js', /gulp\.task\(\'browserify\'/],
+          ['gulp/build.js', /gulp\.task\('browserify'/],
           ['package.json', /gulp-browserify/]
         ]);
 
@@ -1061,16 +1067,134 @@ describe('gulp-angular generator', function () {
         ]));
 
         assert.fileContent([
-          ['gulp/build.js', /gulp\.task\('partials', \['markups'\]/],
+          ['gulp/build.js', /gulp\.task\('partials', \['markups']/],
           ['gulp/markups.js', /gulp\.task\('markups'/],
-          ['gulp/markups.js', /return gulp\.src\(paths\.src \+ '\/{app,components}\/\*\*\/\*\.jade'\)/],
+          ['gulp/markups.js', /return gulp\.src\(paths\.src \+ '\/\{app,components}\/\*\*\/\*\.jade'\)/],
           ['gulp/markups.js', /\.pipe\(\$\.consolidate\('jade'/],
-          ['gulp/watch.js', /gulp\.watch\(paths\.src \+ '\/{app,components}\/\*\*\/\*\.jade', \['markups'\]\);/]
+          ['gulp/watch.js', /gulp\.watch\(paths\.src \+ '\/\{app,components}\/\*\*\/\*\.jade', \['markups']\);/]
         ]);
 
         done();
       });
     });
+  });
+
+  describe('with prompt: [gettext I18N component]', function () {
+    before(function() {
+      optionCase = _.assign(_.cloneDeep(defaultOptions),
+        _.merge({
+          'advanced': true
+        }, skipOptions));
+      promptCase = _.assign(_.cloneDeep(defaultPrompts), {
+        translateComponents: 'gettext'
+      });
+    });
+
+    it('should have gettext gulp task', function (done) {
+      gulpAngular.run({}, function() {
+        assert.file([].concat(_.clone(expectedFile), [
+          'gulp/gettext.js'
+        ]));
+
+        assert.fileContent([
+          ['gulp/gettext.js', /gulp\.task\('gettext:extract'/],
+          ['gulp/gettext.js', /gulp\.task\('gettext:compile'/],
+          ['gulp/gettext.js', /gulp\.task\('gettext', \['gettext:extract',\s*?'gettext:compile']\);/],
+          ['gulp/watch.js', /gulp\.task\('watch',.*?'gettext'/],
+          ['gulp/watch.js', /gulp.watch\(paths.src\s*?\+\s*?'\/app\/gettext\/\*\*\/\*\.po',\s*?\['gettext:compile']\);/]
+        ]);
+
+        done();
+      });
+    });
+
+    it('should have gettext.config.js, template.pot and languages *.po files', function (done) {
+      gulpAngular.run({}, function() {
+        assert.file([].concat(_.clone(expectedFile), [
+          'src/app/gettext/gettext.config.js',
+          'src/app/gettext/template.pot',
+          'src/app/gettext/en.po',
+          'src/app/gettext/fr.po'
+        ]));
+
+        assert.fileContent([
+          ['src/app/gettext/gettext.config.js', /angular\.module\('.*?'\)\.run\(\s*?function\s*?\(gettextCatalog\)\s*?{/]
+        ]);
+
+        done();
+      });
+    });
+
+    it('should declare gettext dependency', function (done) {
+      gulpAngular.run({}, function() {
+        assert.fileContent([
+          ['src/app/index.js', /angular\.module\('.*?',\s* \[.*?'gettext'.*?/]
+        ]);
+
+        done();
+      });
+    });
+
+    it('should have translated html templates', function (done) {
+      gulpAngular.run({}, function() {
+        assert.fileContent([
+          ['src/app/main/main.html', /<span\s*?translate>/],
+          ['src/app/main/main.html', /\|\s*?translate/],
+          ['src/components/navbar/navbar.html', /<span\s*?translate>/]
+        ]);
+
+        done();
+      });
+    });
+  });
+
+  describe('with prompt: [translate I18N component]', function () {
+    before(function() {
+      optionCase = _.assign(_.cloneDeep(defaultOptions),
+        _.merge({
+          'advanced': true
+        }, skipOptions));
+      promptCase = _.assign(_.cloneDeep(defaultPrompts), {
+        translateComponents: 'translate'
+      });
+    });
+
+    it('should have translate.js file', function (done) {
+      gulpAngular.run({}, function() {
+        assert.file([].concat(_.clone(expectedFile), [
+          'src/app/translate/translate.js'
+        ]));
+
+        assert.fileContent([
+          ['src/app/translate/translate.js', /angular\.module\('.*?'\)\.config\(\s*?function\s*?\(\$translateProvider\)\s*?{/],
+        ]);
+
+        done();
+      });
+    });
+
+    it('should declare pascalprecht.translate dependency', function (done) {
+      gulpAngular.run({}, function() {
+        assert.fileContent([
+          ['src/app/index.js', /angular\.module\('.*?',\s* \[.*?'pascalprecht\.translate'.*?/]
+        ]);
+
+        done();
+      });
+    });
+
+    it('should have translated html templates', function (done) {
+      gulpAngular.run({}, function() {
+          assert.fileContent([
+            ['src/app/main/main.html', /<span\s*?translate>/],
+            ['src/app/main/main.html', /\|\s*?translate/],
+            ['src/components/navbar/navbar.html', /<span\s*?translate>/]
+          ]);
+
+          done();
+      });
+    });
+
   });
 
   describe('with paths: [src:path/to/public e2e:path/to/e2e/test dist:path/to/dist tmp:.tmp/folder]', function () {

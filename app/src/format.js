@@ -47,6 +47,12 @@ module.exports = function () {
     this.props.foundationComponents.module
   ]);
 
+  if (this.props.translateComponents === 'translate') {
+    ngModules.push('pascalprecht.translate');
+  } else if (this.props.translateComponents === 'gettext') {
+    ngModules.push('gettext');
+  }
+
   this.modulesDependencies = _.chain(ngModules)
     .filter(_.isString)
     .map(function (dependency) {
@@ -66,12 +72,23 @@ module.exports = function () {
     this.props.foundationComponents.key,
     this.props.cssPreprocessor.key,
     this.props.jsPreprocessor.key,
-    this.props.htmlPreprocessor.key
+    this.props.htmlPreprocessor.key,
+    this.props.translateComponents
   ]
     .filter(_.isString)
     .filter(function(tech) {
       return tech !== 'default' && tech !== 'css' && tech !== 'official' && tech !== 'none';
     });
+
+  this.technologiesLogoCopies = _.map(usedTechs, function(value) {
+    var logo = listTechs[value].logo;
+    if (!logo) {
+      // If no logo is defined, use the angular one.
+      logo = listTechs.angular.logo;
+      listTechs[value].logo = logo;
+    }
+    return 'src/assets/images/' + logo;
+  });
 
   var techsContent = _.map(usedTechs, function(value) {
     return listTechs[value];
@@ -81,11 +98,13 @@ module.exports = function () {
     .replace(/'/g, '\\\'')
     .replace(/"/g, '\'')
     .replace(/\n/g, '\n    ');
-  this.technologiesLogoCopies = _.map(usedTechs, function(value) {
-    return 'src/assets/images/' + listTechs[value].logo;
-  });
 
   this.partialCopies = {};
+
+  this.translated = false;
+  if(this.props.translateComponents === 'translate' || this.props.translateComponents === 'gettext') {
+    this.translated = true;
+  }
 
   var navbarPartialSrc = 'src/components/navbar/__' + this.props.ui.key + '-navbar.html';
   this.partialCopies[navbarPartialSrc] = 'src/components/navbar/navbar.html';
@@ -94,6 +113,9 @@ module.exports = function () {
   if(this.props.router.module !== null) {
     this.partialCopies[routerPartialSrc] = 'src/app/main/main.html';
   }
+
+  var languageSelectPartialSrc = 'src/components/languageSelect/__languageSelect.html';
+  this.partialCopies[languageSelectPartialSrc] = 'src/components/languageSelect/languageSelect.html';
 
   // Compute routing relative to props.router
   if (this.props.router.module === 'ngRoute') {
@@ -210,8 +232,27 @@ module.exports = function () {
     });
   }
   if(this.props.htmlPreprocessor.key === 'none') {
-    templateFiles = _.reject(templateFiles, function(path) {
+    templateFiles = _.reject(templateFiles, function (path) {
       return /markups\.js/.test(path);
+    });
+  }
+  if(this.props.translateComponents !== 'translate') {
+    templateFiles = _.reject(templateFiles, function (path) {
+      return /translate\.js/.test(path);
+    });
+  }
+  if(this.props.translateComponents !== 'gettext') {
+    templateFiles = _.reject(templateFiles, function (path) {
+      return /gettext(?:\.config)?\..+/.test(path); // gulp/gettext.js and src/app/gettext/gettext.config.js
+    });
+
+    staticFiles = _.reject(staticFiles, function (path) {
+      return /\.pot?$/.test(path);
+    });
+  }
+  if (!this.translated) {
+    templateFiles = _.reject(templateFiles, function (path) {
+      return /languageSelect\.controller\..+/.test(path);
     });
   }
 
