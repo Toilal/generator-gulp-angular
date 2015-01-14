@@ -2,13 +2,15 @@
 
 var gulp = require('gulp');
 <% if (props.jsPreprocessor.key === 'typescript') { %>
-  var mkdirp = require('mkdirp');
+var mkdirp = require('mkdirp');
 <% } %>
 var paths = gulp.paths;
 
 var $ = require('gulp-load-plugins')();
 
-gulp.task('scripts', function () {
+gulp.task('scripts',
+<% if (props.jsPreprocessor.key === 'typescript') { %> ['tsd:install'],
+<% } %> function () {
 <% if (props.jsPreprocessor.key === 'typescript') { %>
   mkdirp.sync(paths.tmp);
 <% } %>
