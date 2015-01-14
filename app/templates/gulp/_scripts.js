@@ -28,6 +28,8 @@ gulp.task('scripts',
     .pipe($.coffeelint.reporter())
     .pipe($.coffee())
 <% } if (props.jsPreprocessor.key === 'typescript') { %>
+    .pipe($.tslint())
+    .pipe($.tslint.report('prose', {emitError: false}))
     .pipe($.typescript({sortOutput: true}))
 <% } %>
     .on('error', function handleError(err) {
